@@ -51,3 +51,20 @@ limit 10
 | Mercedes-Benz S-Class (S 500)                                                                                                      | 2016 | 2050      | 85000                | Automobiles & Components           | 
 
 Data showed that products contribute the most carbon emissions: Wind turbine, Land Cruiser, Retaining wall, TCDE, Electric Motor and Mercedes-Benz cars. It aslo can be seen that some of products coming from same industry. Now let's see which industries emitted most carbons. 
+
+### Top 5 industries with highest carbon emissions
+```sql
+select industry_group as Industry, sum(pcf) as Total_pcf 
+from t1
+group by industry_group
+order by Total_pcf DESC limit 5
+```
+
+| Industry                           | Total_pcf | 
+| ---------------------------------: | --------: | 
+| Electrical Equipment and Machinery | 9801558   | 
+| Automobiles & Components           | 2582264   | 
+| Materials                          | 577595    | 
+| Technology Hardware & Equipment    | 363776    | 
+| Capital Goods                      | 258712    | 
+
