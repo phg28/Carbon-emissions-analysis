@@ -133,6 +133,18 @@ limit 10
 Only Gamesa Corporación Tecnológica, S.A. comes from Electrical industry, and is also a company with a huge carbon footprint compared to companies from other industries.
 While the carbon footprint of the automobiles industry is contributed by many companies.
 
+### PCFs of 3 producing stages
+
+```sql
+select sum(upstream_percent_total_pcf) as upstream_PCFs, sum(operations_percent_total_pcf) as operation_PCFs ,sum(downstream_percent_total_pcf) as downstream_PCFs 
+from t1
+```
+
+| upstream_PCFs | operation_PCFs | downstream_PCFs | 
+| ------------: | -------------: | --------------: | 
+| 18744.81      | 9739.07        | 13616.19        | 
+
+The largest amount of carbon emissions comes from upstream activities, followed by downstream and then operations. This shows that while operating, the least amount of carbon is emitted.
 
 ### PCFs trend over the years
 
@@ -159,3 +171,9 @@ During the period from 2013 to 2017, the PCFs trendline could be divided into 3 
 .) The PCF rocketed in 2015.
 
 .) PCFs fell sharply in 2016 and continued to decrease in 2017.
+
+# Insights
+
+
+
+
