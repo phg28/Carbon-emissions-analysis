@@ -68,4 +68,7 @@ order by Total_pcf DESC limit 5
 | Technology Hardware & Equipment    | 363776    | 
 | Capital Goods                      | 258712    | 
 
+Data showed that the industry with highest carbon emission is Electrical Equipment and Machinery, followed by Automobiles. It is noticeable that the Electrical industry has a much higher carbon footprint than other industries, more than 4 times higher than the second highest industry.
+
+
 
