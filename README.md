@@ -30,6 +30,8 @@ select * from t1 limit 10
 
 ## Analysis
 
+
+
 ### Top 10 Products with highest Carbon emissions
 
 ```select product_name, year, weight_kg, carbon_footprint_pcf, industry_group from t1 
@@ -52,23 +54,108 @@ limit 10
 
 Data showed that products contribute the most carbon emissions: Wind turbine, Land Cruiser, Retaining wall, TCDE, Electric Motor and Mercedes-Benz cars. It aslo can be seen that some of products coming from same industry. Now let's see which industries emitted most carbons. 
 
-### Top 5 industries with highest carbon emissions
+
+
+### Top 10 industries with highest carbon emissions
 ```sql
 select industry_group as Industry, sum(pcf) as Total_pcf 
 from t1
 group by industry_group
-order by Total_pcf DESC limit 5
+order by Total_pcf DESC limit 10
 ```
 
-| Industry                           | Total_pcf | 
-| ---------------------------------: | --------: | 
-| Electrical Equipment and Machinery | 9801558   | 
-| Automobiles & Components           | 2582264   | 
-| Materials                          | 577595    | 
-| Technology Hardware & Equipment    | 363776    | 
-| Capital Goods                      | 258712    | 
+| Industry                                         | Total_pcf | 
+| -----------------------------------------------: | --------: | 
+| Electrical Equipment and Machinery               | 9801558   | 
+| Automobiles & Components                         | 2582264   | 
+| Materials                                        | 430199    | 
+| Technology Hardware & Equipment                  | 278650    | 
+| Capital Goods                                    | 258633    | 
+| "Food, Beverage & Tobacco"                       | 109132    | 
+| "Pharmaceuticals, Biotechnology & Life Sciences" | 72486     | 
+| Software & Services                              | 46533     | 
+| Chemicals                                        | 44939     | 
+| Media                                            | 23017     | 
 
 Data showed that the industry with highest carbon emission is Electrical Equipment and Machinery, followed by Automobiles. It is noticeable that the Electrical industry has a much higher carbon footprint than other industries, more than 4 times higher than the second highest industry.
 
 
 
+### Top 10 countries with highest carbon emissions
+
+```sql
+select country_name as Country, sum(pcf) as Total_pcf from t1 
+group by country_name
+order by Total_pcf DESC
+limit 10
+```
+
+| Country     | Total_pcf | 
+| ----------: | --------: | 
+| Spain       | 9786127   | 
+| Germany     | 2251225   | 
+| Japan       | 519348    | 
+| USA         | 451867    | 
+| Brazil      | 167587    | 
+| Luxembourg  | 167007    | 
+| South Korea | 140995    | 
+| Netherlands | 70417     | 
+| Taiwan      | 61511     | 
+| India       | 24574     | 
+
+
+It can be seen that the 2 countries with the highest PCF index are both from Europe, followed by Japan of Asia. America has 2 countries in the top 5: USA and Brazil. 
+With the PCF amount of Spain and Germany far surpassing that of the remaining countries, it seems that Europe is the continent with a much higher PCF level than others.
+
+
+### Top 10 countries with highest carbon emissions
+
+```sql
+select company_name, industry_group, sum(pcf) as Total_pcf from t1
+group by company_name
+order by Total_pcf DESC
+limit 10
+```
+
+| company_name                            | industry_group                     | Total_pcf | 
+| --------------------------------------: | ---------------------------------: | --------: | 
+| "Gamesa Corporación Tecnológica, S.A."  | Electrical Equipment and Machinery | 9778464   | 
+| Daimler AG                              | Automobiles & Components           | 1594300   | 
+| Volkswagen AG                           | Automobiles & Components           | 655960    | 
+| "Hino Motors, Ltd."                     | Automobiles & Components           | 191687    | 
+| Arcelor Mittal                          | Materials                          | 167007    | 
+| Weg S/A                                 | Capital Goods                      | 160655    | 
+| General Motors Company                  | Automobiles & Components           | 137007    | 
+| "Mitsubishi Gas Chemical Company, Inc." | Materials                          | 106008    | 
+| "Daikin Industries, Ltd."               | Capital Goods                      | 105600    | 
+| CJ Cheiljedang                          | "Food, Beverage & Tobacco"         | 94817     | 
+
+Only Gamesa Corporación Tecnológica, S.A. comes from Electrical industry, and is also a company with a huge carbon footprint compared to companies from other industries.
+While the carbon footprint of the automobiles industry is contributed by many companies.
+
+
+### PCFs trend over the years
+
+```sql
+select year, sum(pcf) as Total_pcf from t1
+group by year
+order by year
+```
+
+| year | Total_pcf | 
+| ---: | --------: | 
+| 2013 | 496076    | 
+| 2014 | 548229    | 
+| 2015 | 10810407  | 
+| 2016 | 1612760   | 
+| 2017 | 228531    | 
+
+![image](https://github.com/user-attachments/assets/d154ea1e-c1db-4a0a-9e37-4fab9702c740)
+
+During the period from 2013 to 2017, the PCFs trendline could be divided into 3 parts:
+
+.) In 2013 and 2014, The amount of PCF did not differ significantly, at low levels. 
+
+.) The PCF rocketed in 2015.
+
+.) PCFs fell sharply in 2016 and continued to decrease in 2017.
