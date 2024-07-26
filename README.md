@@ -1,5 +1,19 @@
 # Carbon-emissions-analysis
 
+![Photo by Chris LeBoutillier (unsplash.com)](https://github.com/RusAbk/Carbon-Emission-Analysis/blob/main/cover.jpg?raw=true)
+
+Photo by Chris LeBoutillier (unsplash.com)
+
+This report aims to analyze carbon emissions to examine the carbon footprint across various industries. We aim to identify sectors with the highest levels of emissions by analyzing them across countries and years, as well as to uncover trends. Carbon emissions play a crucial role in the environment, accounting for over 75% of global emissions and posing a significant environmental challenge. These emissions contribute to the accumulation of greenhouse gases in the atmosphere, leading to climate change, planetary warming, and involvement in various environmental disasters. Through this analysis, we hope to gain an understanding of the environmental impact of different industries and contribute to making informed decisions in sustainable development.
+
+## Data Source: Where Our Data Comes From
+Our dataset is compiled from publicly available data from [nature.com](https://nature.com) and encompasses the product carbon footprints (PCF) for various companies. PCFs represent the greenhouse gas emissions associated with specific products, quantified in CO2 (carbon dioxide equivalent).
+
+## Data Structure
+The dataset consists of 4 tables containing information regarding carbon emissions generated during the production of goods.
+
+![Database diagram](https://github.com/RusAbk/Carbon-Emission-Analysis/blob/main/Database%20diagram.png?raw=true)
+
 ## Join tables and Clean data
 Create a temporary table with joining data
 
@@ -28,8 +42,9 @@ select * from t1 limit 10
 | 10661-10-2014 | 85         | 28         | 11                | 2014 | Regular Straight 505® Jeans – Steel (Water                      | 0.7665    | 15                   | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | Levi Strauss & Co.     | USA          | Consumer Durables & Apparel                    | 
 | 10661-10-2015 | 85         | 28         | 6                 | 2015 | Regular Straight 505® Jeans – Steel (Water                      | 0.7665    | 15                   | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | Levi Strauss & Co.     | USA          | "Textiles, Apparel, Footwear and Luxury Goods" | 
 
-## Analysis
 
+
+## Analysis
 
 
 ### Top 10 Products with highest Carbon emissions
@@ -111,7 +126,7 @@ With the PCF amount of Spain and Germany far surpassing that of the remaining co
 ### Top 10 countries with highest carbon emissions
 
 ```sql
-select company_name, industry_group, sum(pcf) as Total_pcf from t1
+select company_name, industry_group, round(sum(pcf),2) as Total_pcf from t1
 group by company_name
 order by Total_pcf DESC
 limit 10
@@ -136,8 +151,11 @@ While the carbon footprint of the automobiles industry is contributed by many co
 ### PCFs of 3 producing stages
 
 ```sql
-select sum(upstream_percent_total_pcf) as upstream_PCFs, sum(operations_percent_total_pcf) as operation_PCFs ,sum(downstream_percent_total_pcf) as downstream_PCFs 
+select round(sum(upstream_percent_total_pcf),2) as upstream_PCFs
+     , round(sum(operations_percent_total_pcf),2) as operation_PCFs 
+	 , round(sum(downstream_percent_total_pcf),2) as downstream_PCFs 
 from t1
+
 ```
 
 | upstream_PCFs | operation_PCFs | downstream_PCFs | 
@@ -172,7 +190,8 @@ During the period from 2013 to 2017, the PCFs trendline could be divided into 3 
 
 .) PCFs fell sharply in 2016 and continued to decrease in 2017.
 
-# Insights
+## Conclusions and Insights
+
 
 
 
