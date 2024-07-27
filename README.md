@@ -123,7 +123,7 @@ It can be seen that the 2 countries with the highest PCF index are both from Eur
 With the PCF amount of Spain and Germany far surpassing that of the remaining countries, it seems that Europe is the continent with a much higher PCF level than others.
 
 
-### Top 10 countries with highest carbon emissions
+### Top 10 companies with highest carbon emissions
 
 ```sql
 select company_name, industry_group, round(sum(pcf),2) as Total_pcf from t1
@@ -190,8 +190,107 @@ During the period from 2013 to 2017, the PCFs trendline could be divided into 3 
 
 .) PCFs fell sharply in 2016 and continued to decrease in 2017.
 
+
+### Carbon emission trend of industry groups
+```sql
+select year, industry_group as Industry, sum(pcf) as Total_pcf 
+from t1
+group by year, industry_group
+order by industry_group, year
+```
+
+| year | Industry                                                               | Total_pcf | 
+| ---: | ---------------------------------------------------------------------: | --------: | 
+| 2015 | "Consumer Durables, Household and Personal Products"                   | 931       | 
+| 2013 | "Food, Beverage & Tobacco"                                             | 4308      | 
+| 2014 | "Food, Beverage & Tobacco"                                             | 2023      | 
+| 2015 | "Food, Beverage & Tobacco"                                             | 0         | 
+| 2016 | "Food, Beverage & Tobacco"                                             | 99639     | 
+| 2017 | "Food, Beverage & Tobacco"                                             | 3162      | 
+| 2015 | "Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber" | 8909      | 
+| 2015 | "Mining - Iron, Aluminum, Other Metals"                                | 8181      | 
+| 2013 | "Pharmaceuticals, Biotechnology & Life Sciences"                       | 32271     | 
+| 2014 | "Pharmaceuticals, Biotechnology & Life Sciences"                       | 40215     | 
+| 2015 | "Textiles, Apparel, Footwear and Luxury Goods"                         | 228       | 
+| 2013 | Automobiles & Components                                               | 130189    | 
+| 2014 | Automobiles & Components                                               | 230015    | 
+| 2015 | Automobiles & Components                                               | 817227    | 
+| 2016 | Automobiles & Components                                               | 1404833   | 
+| 2013 | Capital Goods                                                          | 60117     | 
+| 2014 | Capital Goods                                                          | 93699     | 
+| 2015 | Capital Goods                                                          | 3505      | 
+| 2016 | Capital Goods                                                          | 6369      | 
+| 2017 | Capital Goods                                                          | 94943     | 
+| 2015 | Chemicals                                                              | 44939     | 
+| 2013 | Commercial & Professional Services                                     | 817       | 
+| 2014 | Commercial & Professional Services                                     | 477       | 
+| 2016 | Commercial & Professional Services                                     | 2890      | 
+| 2017 | Commercial & Professional Services                                     | 741       | 
+| 2013 | Consumer Durables & Apparel                                            | 2860      | 
+| 2014 | Consumer Durables & Apparel                                            | 3123      | 
+| 2016 | Consumer Durables & Apparel                                            | 1114      | 
+| 2015 | Containers & Packaging                                                 | 2988      | 
+| 2015 | Electrical Equipment and Machinery                                     | 9801558   | 
+| 2013 | Energy                                                                 | 750       | 
+| 2016 | Energy                                                                 | 10024     | 
+| 2015 | Food & Beverage Processing                                             | 138       | 
+| 2014 | Food & Staples Retailing                                               | 773       | 
+| 2015 | Food & Staples Retailing                                               | 706       | 
+| 2016 | Food & Staples Retailing                                               | 2         | 
+| 2015 | Gas Utilities                                                          | 61        | 
+| 2013 | Household & Personal Products                                          | 0         | 
+| 2013 | Materials                                                              | 194464    | 
+| 2014 | Materials                                                              | 66719     | 
+| 2016 | Materials                                                              | 61887     | 
+| 2017 | Materials                                                              | 107129    | 
+| 2013 | Media                                                                  | 9645      | 
+| 2014 | Media                                                                  | 9645      | 
+| 2015 | Media                                                                  | 1919      | 
+| 2016 | Media                                                                  | 1808      | 
+| 2014 | Retailing                                                              | 11        | 
+| 2015 | Retailing                                                              | 11        | 
+| 2014 | Semiconductors & Semiconductor Equipment                               | 50        | 
+| 2016 | Semiconductors & Semiconductor Equipment                               | 2         | 
+| 2015 | Semiconductors & Semiconductors Equipment                              | 3         | 
+| 2013 | Software & Services                                                    | 3         | 
+| 2014 | Software & Services                                                    | 143       | 
+| 2015 | Software & Services                                                    | 22851     | 
+| 2016 | Software & Services                                                    | 22846     | 
+| 2017 | Software & Services                                                    | 690       | 
+| 2013 | Technology Hardware & Equipment                                        | 60539     | 
+| 2014 | Technology Hardware & Equipment                                        | 101153    | 
+| 2015 | Technology Hardware & Equipment                                        | 93807     | 
+| 2016 | Technology Hardware & Equipment                                        | 1285      | 
+| 2017 | Technology Hardware & Equipment                                        | 21866     | 
+| 2013 | Telecommunication Services                                             | 52        | 
+| 2014 | Telecommunication Services                                             | 183       | 
+| 2015 | Telecommunication Services                                             | 183       | 
+| 2015 | Tires                                                                  | 2022      | 
+| 2015 | Tobacco                                                                | 1         | 
+| 2015 | Trading Companies & Distributors and Commercial Services & Supplies    | 239       | 
+| 2013 | Utilities                                                              | 61        | 
+| 2016 | Utilities                                                              | 61        | 
+
+We can see the change in carbon emissions of industry groups:
+
++) Decrease: Food, Beverage & Tobacco ; Commercial & Professional Services ; Consumer Durables & Apparel ; Food & Staples Retailing ;  Media ; Semiconductors & Semiconductors Equipment ; Software & Services ; Technology Hardware & Equipment 
+
++) Increase: Pharmaceuticals, Biotechnology & Life Sciences ; Automobiles & Components ; Capital Goods ; Energy ; Materials ; Telecommunication Services   
+
+In my opinion, There are some groups that cannot be classified due to lack of data. 
+Overall, the number of groups show decreasing trend more than the increasing one. This is a good signal since some of industry groups have made efforts to reduce carbon emissions.
+
 ## Conclusions and Insights
 
+1. Industry groups that emitted large amount of emissions belongs to the heavy industry such as: Electrical Equipment and Machinery, Automobiles & Components. More specifically, they produce wind turbines and cars.
+
+2. Countries from Europe have alarming carbon emissions because their countries have emissions many times higher than countries on other continents.
+
+3. Gamesa Corporación Tecnológica, S.A. is the only company belonging to Electrical industry group. While the carbon footprint of the automobiles industry is contributed by many companies.
+
+4. The largest amount of carbon emissions came from upstream activities.
+
+5. The number of groups show decreasing trend more than the increasing one.
 
 
 
